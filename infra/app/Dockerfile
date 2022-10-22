@@ -1,6 +1,8 @@
 FROM php:8.1-fpm
 
-RUN apt-get update && apt-get install -y \
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get update && apt-get install -y \
+    nodejs \
     cron \
     gnupg \
     libzip-dev \
@@ -12,10 +14,10 @@ RUN apt-get update && apt-get install -y \
     vim \
     zip \
     zlib1g-dev \
-    zlib1g-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && docker-php-ext-install \
+    zlib1g-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    docker-php-ext-install \
     pdo_mysql \
     opcache
 
